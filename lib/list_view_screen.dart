@@ -14,15 +14,15 @@ class ListViewScreenState extends State<ListViewScreen> {
         appBar: AppBar(
           title: Text("FlutterApp"),
         ),
-        body: new ListView.builder(
+        body: new ListView.separated(
           padding: const EdgeInsets.all(8.0),
-          itemCount: 30 * 2,
+          itemCount: 30,
+          separatorBuilder: (BuildContext context, int index) => Divider(),
           itemBuilder: (BuildContext context, int position) {
-            if (position.isOdd) return Divider();
-            final index = position ~/2;
             return _buildRow(position);
           },
-        ));
+        )
+    );
   }
 
   Widget _buildRow(int i) {
