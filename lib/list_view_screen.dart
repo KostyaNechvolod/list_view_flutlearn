@@ -17,7 +17,7 @@ class ListViewScreenState extends State<ListViewScreen> {
         body: new ListView.separated(
           padding: const EdgeInsets.all(8.0),
           itemCount: 30,
-          separatorBuilder: (BuildContext context, int index) => Divider(),
+          separatorBuilder: (BuildContext context, int item) => Divider(),
           itemBuilder: (BuildContext context, int position) {
             return _buildRow(position);
           },
