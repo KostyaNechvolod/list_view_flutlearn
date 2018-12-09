@@ -10,7 +10,7 @@ class FlutterApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Login',
       theme: ThemeData(
-        primarySwatch: Colors.teal
+        primarySwatch: Colors.lightBlue
       ),
       home: LoginPage(),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'list_view_screen.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -13,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   FormMode _formMode = FormMode.SIGNIN;
 
   final formKey = new GlobalKey<FormState>();
-  
+
   void _signUp() {
     formKey.currentState.reset();
     setState(() {
@@ -106,43 +108,74 @@ class _LoginPageState extends State<LoginPage> {
     if (_formMode == FormMode.SIGNIN) {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 16.0),
-        child: Material(
-          borderRadius: BorderRadius.circular(30.0),
-          shadowColor: Colors.blueAccent.shade100,
-          elevation: 5.0,
-          child: MaterialButton(
-            minWidth: 200.0,
-            height: 42.0,
-            color: Colors.blue,
-            child: Text(
-              'Login',
-              style: TextStyle(fontSize: 20.0, color: Colors.white),
-            ),
-            onPressed: () {
-              formKey.currentState.validate();},
+        child: RaisedButton(
+          shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+          color: Colors.blue,
+          child: Text('Login',
+            style: TextStyle(fontSize: 20.0, color: Colors.white),
           ),
+          onPressed: () {
+            if (formKey.currentState.validate()) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ListViewScreen()));
+            }
+          }
         ),
+//        child: Material(
+//          borderRadius: BorderRadius.circular(30.0),
+//          shadowColor: Colors.blueAccent.shade100,
+//          elevation: 5.0,
+//          child: MaterialButton(
+//            shape: RoundedRectangleBorder(
+//              borderRadius: BorderRadius.circular(30.0),
+//            ),
+//            minWidth: 200.0,
+//            height: 42.0,
+//            color: Colors.blue,
+//            child: Text(
+//              'Login',
+//              style: TextStyle(fontSize: 20.0, color: Colors.white),
+//            ),
+//            onPressed: () {
+//              formKey.currentState.validate();
+//              Navigator.push(
+//                  context,
+//                  MaterialPageRoute(builder: (context) => ListViewScreen()));},
+//          ),
+//        ),
       );
     } else {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 16.0),
-        child: Material(
-          borderRadius: BorderRadius.circular(30.0),
-          shadowColor: Colors.blueAccent.shade100,
-          elevation: 5.0,
-          child: MaterialButton(
-            minWidth: 200.0,
-            height: 42.0,
-            color: Colors.blue,
-            child: Text(
-              ' Don\'t have an account? Sign up',
-              style: TextStyle(fontSize: 20.0, color: Colors.white),
-            ),
-            onPressed: () {
-              formKey.currentState.validate();
-            },
+        child: RaisedButton(
+          shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+          color: Colors.blue,
+          child: Text(
+            ' Don\'t have an account? Sign up',
+            style: TextStyle(fontSize: 20.0, color: Colors.white),
           ),
+          onPressed: () {
+            formKey.currentState.validate();
+          },
         ),
+//        child: Material(
+//          borderRadius: BorderRadius.circular(30.0),
+//          shadowColor: Colors.blueAccent.shade100,
+//          elevation: 5.0,
+//          child: MaterialButton(
+//            minWidth: 200.0,
+//            height: 42.0,
+//            color: Colors.blue,
+//            child: Text(
+//              ' Don\'t have an account? Sign up',
+//              style: TextStyle(fontSize: 20.0, color: Colors.white),
+//            ),
+//            onPressed: () {
+//              formKey.currentState.validate();
+//            },
+//          ),
+//        ),
       );
     }
   }
