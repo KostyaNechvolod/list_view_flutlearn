@@ -21,8 +21,7 @@ class ListViewScreenState extends State<ListViewScreen> {
           itemBuilder: (BuildContext context, int position) {
             return _buildRow(position);
           },
-        )
-    );
+        ));
   }
 
   Widget _buildRow(int i) {
