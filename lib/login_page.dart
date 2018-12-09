@@ -168,13 +168,12 @@ class _LoginPageState extends State<LoginPage> {
               child: _setupButtonChild(),
               onPressed: () {
                 if (formKey.currentState.validate()) {
-                  setState(() {
+                  setState(() async {
                     if (_showProgress == false) {
-                      //Future.delayed(Duration(seconds: 10));
                       animateButton();
-                      //Future.delayed(Duration(seconds: 2 ));
-                      //Navigator.of(context).pushReplacementNamed('/login_screen');
-                      Navigator.pushNamed(context, '/login_screen'); // debug mode
+                      await Future.delayed(Duration(seconds: 3));
+                      Navigator.of(context)
+                          .pushReplacementNamed('/login_screen');
                     }
                   });
                 }
