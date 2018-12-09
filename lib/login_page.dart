@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'dart:async';
+
 import 'list_view_screen.dart';
 import 'main.dart';
 
@@ -19,17 +21,12 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _obscureText = true;
 
+  bool _showProgress = false;
+
   void _signUp() {
     formKey.currentState.reset();
     setState(() {
       _formMode = FormMode.SIGNIN;
-    });
-  }
-
-  void _signIn() {
-    formKey.currentState.reset();
-    setState(() {
-      _formMode = FormMode.SIGNUP;
     });
   }
 
@@ -141,24 +138,47 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _setupButtonChild() {
+    if (!_showProgress) {
+      return RaisedButton(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        color: Colors.blue,
+        child: Text(
+          'Login',
+          style: TextStyle(fontSize: 20.0, color: Colors.white),
+        ),
+      );
+    } else {
+      return CircularProgressIndicator();
+    }
+  }
+
+  void animateButton() {
+    setState(() {
+      _showProgress = true;
+    });
+  }
+
   Widget _submitButton() {
     if (_formMode == FormMode.SIGNIN) {
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        child: RaisedButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0)),
-            color: Colors.blue,
-            child: Text(
-              'Login',
-              style: TextStyle(fontSize: 20.0, color: Colors.white),
-            ),
-            onPressed: () {
-              if (formKey.currentState.validate()) {
-                Navigator.of(context).pushReplacementNamed('/login_screen');
-              }
-            }),
-      );
+          padding: EdgeInsets.symmetric(vertical: 16.0),
+          child: MaterialButton(
+              child: _setupButtonChild(),
+              onPressed: () {
+                if (formKey.currentState.validate()) {
+                  setState(() {
+                    if (_showProgress == false) {
+                      //Future.delayed(Duration(seconds: 10));
+                      animateButton();
+                      //Future.delayed(Duration(seconds: 2 ));
+                      //Navigator.of(context).pushReplacementNamed('/login_screen');
+                      Navigator.pushNamed(context, '/login_screen'); // debug mode
+                    }
+                  });
+                }
+              }));
     } else {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 16.0),
