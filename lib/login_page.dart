@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
-          border: new OutlineInputBorder(
+          border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(10.0),
             ),
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
       obscureText: _obscureText,
       autofocus: false,
       decoration: InputDecoration(
-          border: new OutlineInputBorder(
+          border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               const Radius.circular(10.0),
             ),
@@ -149,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 16.0),
         child: RaisedButton(
-          shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           color: Colors.blue,
           child: Text('Login',
             style: TextStyle(fontSize: 20.0, color: Colors.white),
@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 16.0),
         child: RaisedButton(
-          shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           color: Colors.blue,
           child: Text(
             'Sign up',
