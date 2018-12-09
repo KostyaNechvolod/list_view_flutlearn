@@ -16,6 +16,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final formKey = new GlobalKey<FormState>();
 
+  bool _obscureText = true;
+
   void _signUp() {
     formKey.currentState.reset();
     setState(() {
@@ -34,8 +36,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Login'),
+        title: Text('Flutter Login', style: TextStyle(color: Colors.white,)),
       ),
+      backgroundColor: Colors.deepPurpleAccent[100],
       body: Container(
         padding: EdgeInsets.all(8.0),
         child: Form(
@@ -73,17 +76,34 @@ class _LoginPageState extends State<LoginPage> {
     return SizedBox(height: _height);
   }
 
+  String validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Enter Valid Email';
+    else
+      return null;
+  }
+
   Widget _emailInput() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
+          border: new OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(10.0),
+            ),
+          ),
+        filled: true,
+          fillColor: Colors.grey[400],
           hintText: 'Email',
           icon: Icon(
             Icons.mail,
-            color: Colors.grey,
+            color: Colors.black87,
           )),
-      validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+      validator: validateEmail,
       onSaved: (value) => _email = value,
     );
   }
@@ -95,11 +115,31 @@ class _LoginPageState extends State<LoginPage> {
           return 'Password can\'t be empty';
         }
       },
-      obscureText: true,
+      obscureText: _obscureText,
       autofocus: false,
       decoration: InputDecoration(
-          hintText: 'Password', icon: Icon(Icons.lock, color: Colors.grey)),
-      //validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+          border: new OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(10.0),
+            ),
+          ),
+          filled: true,
+          fillColor: Colors.grey[400],
+          hintText: 'Password',
+          suffixIcon: IconButton(
+               icon: Icon(Icons.lightbulb_outline),
+              color: Colors.black87,
+            onPressed: () {
+                 setState(() {
+                   _obscureText = !_obscureText;
+                 });
+                 },
+          ),
+          icon: Icon(
+              Icons.lock,
+              color: Colors.black87
+          )
+      ),
       onSaved: (value) => _password = value,
     );
   }
@@ -122,28 +162,6 @@ class _LoginPageState extends State<LoginPage> {
             }
           }
         ),
-//        child: Material(
-//          borderRadius: BorderRadius.circular(30.0),
-//          shadowColor: Colors.blueAccent.shade100,
-//          elevation: 5.0,
-//          child: MaterialButton(
-//            shape: RoundedRectangleBorder(
-//              borderRadius: BorderRadius.circular(30.0),
-//            ),
-//            minWidth: 200.0,
-//            height: 42.0,
-//            color: Colors.blue,
-//            child: Text(
-//              'Login',
-//              style: TextStyle(fontSize: 20.0, color: Colors.white),
-//            ),
-//            onPressed: () {
-//              formKey.currentState.validate();
-//              Navigator.push(
-//                  context,
-//                  MaterialPageRoute(builder: (context) => ListViewScreen()));},
-//          ),
-//        ),
       );
     } else {
       return Padding(
@@ -152,30 +170,13 @@ class _LoginPageState extends State<LoginPage> {
           shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
           color: Colors.blue,
           child: Text(
-            ' Don\'t have an account? Sign up',
+            'Sign up',
             style: TextStyle(fontSize: 20.0, color: Colors.white),
           ),
           onPressed: () {
             formKey.currentState.validate();
           },
         ),
-//        child: Material(
-//          borderRadius: BorderRadius.circular(30.0),
-//          shadowColor: Colors.blueAccent.shade100,
-//          elevation: 5.0,
-//          child: MaterialButton(
-//            minWidth: 200.0,
-//            height: 42.0,
-//            color: Colors.blue,
-//            child: Text(
-//              ' Don\'t have an account? Sign up',
-//              style: TextStyle(fontSize: 20.0, color: Colors.white),
-//            ),
-//            onPressed: () {
-//              formKey.currentState.validate();
-//            },
-//          ),
-//        ),
       );
     }
   }
@@ -183,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _label() {
     if (_formMode == FormMode.SIGNIN) {
       return FlatButton(
-        child: Text('Create an account',
+        child: Text('Don\'t have an account? Sign up',
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
         onPressed: _signIn,
       );
