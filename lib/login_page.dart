@@ -49,11 +49,11 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 SizedBox(height: 50.0),
                 _logo(),
-                SizedBox(height: 100.0),
+                SizedBox(height: 80.0),
                 _emailInput(),
-                SizedBox(height: 15.0),
+                SizedBox(height: 10.0),
                 _passwordInput(),
-                SizedBox(height: 30.0),
+                SizedBox(height: 10.0),
                 _submitButton(),
                 _label()
               ],
@@ -199,10 +199,19 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _label() {
     if (_formMode == FormMode.SIGNIN) {
-      return FlatButton(
-        child: Text('Don\'t have an account? Sign up',
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-        onPressed: () {},
+      return Column(
+        children: <Widget>[
+          FlatButton(
+            child: Text('Don\'t have an account? Sign up',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+            onPressed: () {},
+          ),
+          FlatButton(
+            child: Text('Forget password?',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+            onPressed: () {},
+          ),
+        ],
       );
     } else {
       return FlatButton(
